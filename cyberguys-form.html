@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CyberGuys Script Sender</title>
+  <style>
+    body {
+      background-color: #1B1B1B;
+      color: #7CFC00;
+      font-family: 'Courier New', Courier, monospace;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #7CFC00;
+    }
+    textarea {
+      width: 100%;
+      background-color: #0F0F0F;
+      color: #7CFC00;
+      border: 1px solid #7CFC00;
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 8px;
+    }
+    button {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      font-size: 18px;
+      background-color: #66FF66;
+      color: #1B1B1B;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #32CD32;
+    }
+  </style>
+</head>
+<body>
+  <h1>CyberGuys Script Sender</h1>
+  <textarea id="scriptText" rows="20" placeholder="Paste your full script here..."></textarea>
+  <button onclick="sendScript()">Send to CyberGuys Automation</button>
+
+  <script>
+    function sendScript() {
+      const scriptContent = document.getElementById('scriptText').value;
+
+      fetch('https://hook.eu2.make.com/489hq0q0878cn69kcbon8obwkxohxy03', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          value: scriptContent
+        })
+      })
+      .then(response => {
+        if (response.ok) {
+          alert('✅ Script successfully sent to CyberGuys Automation!');
+          document.getElementById('scriptText').value = ""; // Clear textarea
+        } else {
+          alert('❌ Failed to send script. Please try again.');
+        }
+      })
+      .catch(error => {
+        alert('❌ Error sending script: ' + error);
+      });
+    }
+  </script>
+</body>
+</html>
